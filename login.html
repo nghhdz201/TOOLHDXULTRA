@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDXTOOL | LOGIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #007bff;
+            --bg-color: #f7f9fc;
+            --card-bg: #ffffff;
+            --border-color: #e0e6ed;
+            --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition-speed: 0.4s ease;
+            --border-radius: 16px; /* Tăng bo góc */
+        }
+
+        /* 1. Nền và Bố cục 3D */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e9f0f6, #cfd8e1); /* Gradient nền nhẹ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+            /* Thiết lập phối cảnh cho hiệu ứng 3D */
+            perspective: 1000px;
+        }
+
+        /* Container Card - Hiệu ứng Parallax nhẹ */
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            padding: 45px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: all var(--transition-speed);
+            transform-style: preserve-3d; /* Giữ hiệu ứng 3D bên trong */
+            z-index: 10;
+        }
+
+        /* Hiệu ứng Parallax khi hover toàn bộ form */
+        .login-card:hover {
+            transform: translateZ(20px) translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 2. Header */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h2 {
+            font-size: 32px; /* Lớn hơn */
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            letter-spacing: -0.5px; /* Chữ sắc nét hơn */
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #6c757d;
+        }
+
+        /* 3. Input Fields */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper input {
+            width: 100%;
+            padding: 16px 15px; /* Tăng padding */
+            padding-left: 50px; 
+            border: 2px solid var(--border-color); /* Viền đậm hơn */
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+            background-color: #fafbfd; /* Nền input hơi xám */
+            transition: all var(--transition-speed);
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+            background-color: var(--card-bg); /* Trắng khi focus */
+        }
+
+        .input-wrapper .icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            transition: color var(--transition-speed);
+            font-size: 18px;
+        }
+
+        .input-wrapper input:focus + .icon {
+            color: var(--primary-color);
+        }
+        
+        /* 4. Tùy chọn và Nút Bấm */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .forgot-link {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity var(--transition-speed);
+        }
+
+        .forgot-link:hover {
+            opacity: 0.8;
+        }
+        
+        /* Checkbox Tùy chỉnh */
+        .checkbox-custom label {
+            font-size: 14px;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        /* Button Đăng Nhập */
+        .login-button {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        /* 5. Social Login (Tính năng xịn hơn) */
+        .divider {
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            color: #ccc;
+            font-size: 14px;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+            margin: 0 10px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .social-button {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        .social-button i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .social-button.google {
+            color: #ea4335;
+        }
+        .social-button.facebook {
+            color: #1877f2;
+        }
+        .social-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 6. Footer */
+        .footer-link {
+            text-align: center;
+            margin-top: 35px;
+            font-size: 15px;
+            color: #6c757d;
+        }
+
+        .footer-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="header">
+        <h2>HDXPLUSLOGIN</h2>
+        <p>Đăng nhập để bắt đầu Tool</p>
+    </div>
+    
+    <div class="social-buttons">
+        <button class="social-button google">
+            <i class="fab fa-google"></i> Google
+        </button>
+        <button class="social-button facebook">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </button>
+    </div>
+
+    <div class="divider">Hoặc</div>
+    
+    <form action="#" method="POST">
+        
+        <div class="form-group">
+            <div class="input-wrapper">
+                <input type="email" placeholder="Email hoặc Tên đăng nhập" required>
+                <i class="fas fa-user icon"></i>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-wrapper">
+                <input type="password" placeholder="Mật khẩu" required>
+                <i class="fas fa-lock icon"></i>
+            </div>
+        </div>
+        
+        <div class="options">
+            <div class="checkbox-custom">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Ghi nhớ tôi</label>
+            </div>
+            <a href="#" class="forgot-link">Quên mật khẩu?</a>
+        </div>
+        
+        <button type="submit" class="login-button">
+            Đăng Nhập
+        </button>
+        
+    </form>
+    
+    <div class="footer-link">
+        Chưa có tài khoản? <a href="#">Tạo ngay</a>
+    </div>
+</div>
+
+</body>
+</html>
